@@ -44,6 +44,7 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  default: AxiosRequestConfig
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
