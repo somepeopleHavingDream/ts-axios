@@ -14,6 +14,12 @@ function normalizeHeaderName(headers: any, normalizedName: string): void {
   })
 }
 
+/**
+ * 这个函数目前只处理 Content-Type 请求头
+ *
+ * @param headers 请求头
+ * @param data 请求体
+ */
 export function processHeaders(headers: any, data: any): any {
   normalizeHeaderName(headers, 'Content-Type')
 
