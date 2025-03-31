@@ -33,6 +33,7 @@ export default class Axios {
   }
 
   request(url: any, config?: any): AxiosPromise {
+    // 这里的 url 具有二义性， url 可能是 url 字符串，也可能是一个请求配置，二者取其一
     if (typeof url === 'string') {
       if (!config) {
         config = {}
