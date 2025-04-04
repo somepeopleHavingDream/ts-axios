@@ -1,6 +1,7 @@
-import axios, { AxiosError } from '../../src/index'
+import axios from '../../src/index'
 
 import 'nprogress/nprogress.css'
+import qs from 'qs'
 
 // document.cookie = 'a=b'
 //
@@ -97,59 +98,65 @@ import 'nprogress/nprogress.css'
 //     console.log(res)
 //   })
 
+// axios
+//   .get('/more/304')
+//   .then(res => {
+//     console.log(res)
+//   })
+//   .catch((e: AxiosError) => {
+//     console.log(e.message)
+//   })
+//
+// axios
+//   .get('/more/304', {
+//     validateStatus(status) {
+//       return status >= 200 && status < 400
+//     }
+//   })
+//   .then(res => {
+//     console.log(res)
+//   })
+//   .catch((e: AxiosError) => {
+//     console.log(e.message)
+//   })
+//
 axios
-  .get('/more/304')
+  .get('/more/get', {
+    params: new URLSearchParams('a=b&c=d')
+  })
   .then(res => {
     console.log(res)
   })
-  .catch((e: AxiosError) => {
-    console.log(e.message)
-  })
 
 axios
-  .get('/more/304', {
-    validateStatus(status) {
-      return status >= 200 && status < 400
+  .get('/more/get', {
+    params: {
+      a: 1,
+      b: 2,
+      c: ['a', 'b', 'c']
     }
   })
   .then(res => {
     console.log(res)
   })
-  .catch((e: AxiosError) => {
-    console.log(e.message)
+
+const instance = axios.create({
+  paramsSerializer(params) {
+    return qs.stringify(params, { arrayFormat: 'brackets' })
+  }
+})
+
+instance
+  .get('/more/get', {
+    params: {
+      a: 1,
+      b: 2,
+      c: ['a', 'b', 'c']
+    }
   })
-//
-// axios.get('/more/get', {
-//   params: new URLSearchParams('a=b&c=d')
-// }).then(res => {
-//   console.log(res)
-// })
-//
-// axios.get('/more/get', {
-//   params: {
-//     a: 1,
-//     b: 2,
-//     c: ['a', 'b', 'c']
-//   }
-// }).then(res => {
-//   console.log(res)
-// })
-//
-// const instance = axios.create({
-//   paramsSerializer(params) {
-//     return qs.stringify(params, { arrayFormat: 'brackets' })
-//   }
-// })
-//
-// instance.get('/more/get', {
-//   params: {
-//     a: 1,
-//     b: 2,
-//     c: ['a', 'b', 'c']
-//   }
-// }).then(res => {
-//   console.log(res)
-// })
+  .then(res => {
+    console.log(res)
+  })
 
 // const instance = axios.create({
 //   baseURL: 'https://img.mukewang.com/'
